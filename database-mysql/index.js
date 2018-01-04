@@ -8,8 +8,10 @@ var connection = mysql.createConnection({
   database : 'test'
 });
 
-var selectAll = function(callback) {
-  connection.query('SELECT * FROM items', function(err, results, fields) {
+var selectPapers = function(title='*', callback) {
+  let selection = title;
+  let query = 'SELECT ? FROM papers';
+  connection.query(query, [selection], function(err, results, fields) {
     if(err) {
       callback(err, null);
     } else {
@@ -18,4 +20,4 @@ var selectAll = function(callback) {
   });
 };
 
-module.exports.selectAll = selectAll;
+module.exports.selectPapers = selectPapers;
