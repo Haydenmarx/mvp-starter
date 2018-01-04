@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
+import SearchBar from './components/SearchBar.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +16,21 @@ class App extends React.Component {
     $.ajax({
       url: '/papers', 
       success: (data) => {
-        console.log(data);
+        this.setState({
+          papers: data
+        })
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+  }
+
+  searchByParam(title) {
+    $.ajax({
+      url: '/papers',
+      data: title, 
+      success: (data) => {
         this.setState({
           papers: data
         })
@@ -29,7 +44,8 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>Item List</h1>
-      <List papers={this.state.papers}/>
+      <SearchBar searchByParam= {this.searchByParam} />
+      <List papers={this.state.papers} />
     </div>)
   }
 }
