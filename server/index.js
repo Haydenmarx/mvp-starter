@@ -1,12 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var items = require('../database-mysql');
+var db = require('../database-mysql/index.js');
 
 var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
-
 app.get('/papers', function (req, res) {
-  items.selectAll(function(err, data) {
+  let selection;
+  db.selectPapers("*", function(err, data) {
     if(err) {
       res.sendStatus(500);
     } else {

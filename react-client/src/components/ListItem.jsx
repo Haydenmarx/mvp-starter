@@ -2,8 +2,9 @@ import React from 'react';
 
 const ListItem = (props) => (
   <div>
+    {console.log(props)}
     <h1>{ props.paper.title }</h1>
-    <textarea>{ props.paper.body }</textarea>
+    <textarea value={ props.paper.body } ></textarea>
   </div>
 )
 
