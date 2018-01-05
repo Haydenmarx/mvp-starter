@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "react-dev": "webpack -d --watch",
-    "server-dev": "nodemon server/index.js"
+    "server-dev": "nodemon server/index.js",
+    "sass-start": "sass --watch react-client/src/style.scss:react-client/dist/style.css"
   },
   "author": "Beth Johnson",
   "license": "ISC",
@@ -19,6 +20,7 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.0",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.1.1",
     "mongoose": "^4.8.6",
     "mysql": "^2.13.0",

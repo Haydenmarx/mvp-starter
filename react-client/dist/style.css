@@ -1,0 +1,18 @@
+.paper {
+  background: #87e787;
+  margin: 20px;
+  position: relative; }
+  .paper > textarea {
+    margin: 30px;
+    width: 90%;
+    min-height: 200px; }
+  .paper > i {
+    cursor: pointer;
+    position: absolute;
+    top: 30px;
+    right: 150px; }
+    .paper > i:nth-of-type(1) {
+      top: 30px;
+      right: 100px; }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,20 @@
+.paper {
+  background: rgb(135, 231, 135);
+  margin: 20px;
+  position: relative;
+  & > textarea {
+    margin: 30px;
+    width: 90%;
+    min-height: 200px;
+  }
+  & > i {
+    cursor : pointer;
+    position: absolute;
+    top: 30px;
+    right: 150px;
+    &:nth-of-type(1) {
+      top: 30px;
+      right: 100px;
+    }
+  }
+}

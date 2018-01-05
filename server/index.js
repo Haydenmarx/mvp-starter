@@ -4,9 +4,12 @@ var db = require('../database-mysql/index.js');
 
 var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
+app.use(bodyParser.json());
 
 app.get('/papers', function (req, res) {
-  let selection = req.body === undefined ? '*' : req.body.title === undefined ? '*' : req.body.title;
+  let selection = req.url.slice(8).length === 0 ? '*' : toSpace(req.url.slice(8));
+  // let selection = req.search === undefined ? '*' : JSON.parse(req.search).search;
+  console.log(selection);
   db.selectPapers(selection, function(err, data) {
     if(err) {
       res.sendStatus(500);
@@ -20,3 +23,8 @@ app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
 
+var toSpace = (str) => {
+  return str.replace(/(%20)/g, (word)=>{
+    return ' ';
+  });
+};
