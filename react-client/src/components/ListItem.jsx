@@ -16,6 +16,7 @@ class ListItem extends React.Component {
     this.setBody = this.setBody.bind(this);
     this.updateTitle = this.updateTitle.bind(this);
     this.updateBody = this.updateBody.bind(this);
+    this.saveToDb = this.saveToDb.bind(this);
   }
 
   setClose(){
@@ -50,7 +51,13 @@ class ListItem extends React.Component {
     this.setState({unSavedBody : e.target.value});
   }
 
+  saveToDb() {
+    this.props.savePaper(this.state.unSavedTitle, this.state.unSavedBody, this.props.paper.id, this.props.index, this.props.cb);
+    this.setState({savedBody : this.state.unSavedBody, savedTitle : this.state.unSavedTitle});    
+  }
+
   render () {
+    console.log(this.props);
     return(
     <div className="paper">
       { this.state.close === true ?
@@ -74,7 +81,7 @@ class ListItem extends React.Component {
           </div>
         :
           <div>
-            <i className="fa fa-floppy-o fa-2x" aria-hidden="true" style={{color:'red'}} onClick={ ()=>{this.props.savePaper(this.props.paper.title, this.props.paper.body, this.props.paper.id, this.props.index, this.props.cb)}} ></i>
+            <i className="fa fa-floppy-o fa-2x" aria-hidden="true" style={{color:'red'}} onClick={ this.saveToDb } ></i>
             <i className="fa fa-undo fa-2x" aria-hidden="true" onClick={()=>{ this.setBody('revert'); }}></i>
           </div>
         }
@@ -85,19 +92,3 @@ class ListItem extends React.Component {
 }
 
 export default ListItem;
-
-/*
-value={ this.state.unSavedBody } 
-onChange={ (e)=>{this.updateBody(e);} ></textarea>
-
-
-value={ this.state.unSavedTitle } 
-onChange={(e)=>{this.updateTitle(e)}} 
-onClick={(e)=>{
-  this.props.updateBody(e, this.props.index, 'title', this.state.unSavedTitle); 
-  this.setTitle()}
-}
-
-onClick={()=>{this.setTitle()}}
-
-*/

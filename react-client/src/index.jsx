@@ -20,8 +20,9 @@ class App extends React.Component {
   }
 
   addPaper() {
+    console.log('add paper');
     let temp = this.state.papers.slice();
-    temp.unshift({'title' : 'Add title', 'body' : 'Add paper', 'saved' : false})
+    temp.push({'title' : 'Add title', 'body' : 'Add paper', 'saved' : false})
     this.setState({papers : temp});
   }
 
@@ -121,8 +122,8 @@ class App extends React.Component {
     return (
       <div>
         <h1>Item List</h1>
-        <SearchBar searchByParam= {this.searchByParam} addPaper = {this.addPaper} />
-        <List papers={this.state.papers} updateBody = {this.updateBodyTitle} removePaper={this.removePaper} savePaper={this.savePaper} successfulSave={this.successfulSave} />
+        <SearchBar searchByParam= {this.searchByParam} addPaper = {this.addPaper}/>
+        <List papers={this.state.papers} updateBody = {this.updateBodyTitle} removePaper={this.removePaper} savePaper={this.savePaper} successfulSave={this.successfulSave} addPaper = {this.addPaper} />
       </div>
     )
   }

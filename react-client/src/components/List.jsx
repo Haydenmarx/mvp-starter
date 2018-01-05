@@ -11,7 +11,8 @@ const List = (props) => (
         return paper.title + '.';
       }
     })}
-    { props.papers.map((paper, index) => <ListItem paper={paper} savedTitle={paper.title} key= {index} index={index} updateBody = {props.updateBody} removePaper={props.removePaper} savePaper={props.savePaper} cb={props.successfulSave} />)}
+    {/* <button onClick={ props.addPaper } >New Paper</button> */}
+    { props.papers.map((paper, index) => <ListItem paper={paper} savedTitle={paper.title} key= {index} index={index} updateBody = {props.updateBody} removePaper={props.removePaper} savePaper={props.savePaper} cb={props.successfulSave} x={console.log(paper)}/>)}
   </div>
 )
 

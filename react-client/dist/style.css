@@ -12,6 +12,7 @@
     height: 37.33px; }
   .paper > textarea {
     margin: 30px;
+    max-width: 90%;
     width: 90%;
     min-height: 200px; }
   .paper > i {

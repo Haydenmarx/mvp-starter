@@ -17,7 +17,6 @@ class SearchBar extends React.Component {
         <label>Load: </label>
         <input value={ this.state.searching } onChange={ this.updateState } />
         <button onClick={()=>{this.props.searchByParam(this.state.searching)}}>Search</button>
-        <br />
         <button onClick={ this.props.addPaper } >New Paper</button>
       </div>
     )
