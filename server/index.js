@@ -19,9 +19,21 @@ app.get('/papers', function (req, res) {
 
 app.post('/papers', function (req, res) {
   if ('request:', req.body.id === 'new') {
-    //addAnewEntry
+    db.addPapers(req.body.title, req.body.body, function(err, data) {
+      if(err) {
+        res.sendStatus(500);
+      } else {
+        res.json(data);
+      }
+    });
   } else {
-    //updateEntry
+    db.updatePapers(req.body.title, req.body.body, req.body.id, function(err, data) {
+      if(err) {
+        res.sendStatus(500);
+      } else {
+        res.json(data);
+      }
+    });
   }
   //req.body.title, req.body.body
 });

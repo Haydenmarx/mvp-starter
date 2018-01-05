@@ -10,7 +10,21 @@ var connection = mysql.createConnection({
 var selectPapers = function(title, callback) {
   var query = title === '*' ? 'SELECT * FROM papers' : 'SELECT * FROM papers WHERE title = ?'
   title = title === '*' ? '' : title;
+  // console.log(connection);
   connection.query(query, title, function(err, results, fields) {
+    if(err) {
+      console.log(err);
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
+var addPapers = function(title, body, callback) {
+  var post  = {title: title, body: body};
+  var query = 'INSERT INTO papers SET ?'
+  connection.query(query, post, function(err, results, fields) {
     if(err) {
       callback(err, null);
     } else {
@@ -19,22 +33,10 @@ var selectPapers = function(title, callback) {
   });
 };
 
-var addPapers = function(title, callback) {
-  var query = title === '*' ? 'SELECT * FROM papers' : 'SELECT * FROM papers WHERE title = ?'
-  title = title === '*' ? '' : title;
-  connection.query(query, title, function(err, results, fields) {
-    if(err) {
-      callback(err, null);
-    } else {
-      callback(null, results);
-    }
-  });
-};
-
-var updatePapers = function(title, callback) {
-  var query = title === '*' ? 'SELECT * FROM papers' : 'SELECT * FROM papers WHERE title = ?'
-  title = title === '*' ? '' : title;
-  connection.query(query, title, function(err, results, fields) {
+var updatePapers = function(title, body, id, callback) {
+  console.log('title: ', title, '. body: ', body, '. id:', id)
+  var query = 'UPDATE papers SET title = ?, body = ? WHERE id = ?';
+  connection.query(query, [title, body, id], function(err, results, fields) {
     if(err) {
       callback(err, null);
     } else {
@@ -44,3 +46,5 @@ var updatePapers = function(title, callback) {
 };
 
 module.exports.selectPapers = selectPapers;
+module.exports.addPapers = addPapers;
+module.exports.updatePapers = updatePapers;
