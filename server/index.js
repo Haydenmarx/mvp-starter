@@ -8,8 +8,6 @@ app.use(bodyParser.json());
 
 app.get('/papers', function (req, res) {
   let selection = req.url.slice(8).length === 0 ? '*' : toSpace(req.url.slice(8));
-  // let selection = req.search === undefined ? '*' : JSON.parse(req.search).search;
-  console.log(selection);
   db.selectPapers(selection, function(err, data) {
     if(err) {
       res.sendStatus(500);
@@ -17,6 +15,15 @@ app.get('/papers', function (req, res) {
       res.json(data);
     }
   });
+});
+
+app.post('/papers', function (req, res) {
+  if ('request:', req.body.id === 'new') {
+    //addAnewEntry
+  } else {
+    //updateEntry
+  }
+  //req.body.title, req.body.body
 });
 
 app.listen(3000, function() {

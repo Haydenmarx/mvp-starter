@@ -19,4 +19,28 @@ var selectPapers = function(title, callback) {
   });
 };
 
+var addPapers = function(title, callback) {
+  var query = title === '*' ? 'SELECT * FROM papers' : 'SELECT * FROM papers WHERE title = ?'
+  title = title === '*' ? '' : title;
+  connection.query(query, title, function(err, results, fields) {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
+var updatePapers = function(title, callback) {
+  var query = title === '*' ? 'SELECT * FROM papers' : 'SELECT * FROM papers WHERE title = ?'
+  title = title === '*' ? '' : title;
+  connection.query(query, title, function(err, results, fields) {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
 module.exports.selectPapers = selectPapers;

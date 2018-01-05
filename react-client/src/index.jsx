@@ -17,19 +17,25 @@ class App extends React.Component {
   }
 
   addPaper() {
-    let temp = this.state.papers.unshift({'title' : 'Add title', 'body' : 'Add paper'})
-    this.setState({data : temp});
+    let temp = this.state.papers.slice();
+    temp.unshift({'title' : 'Add title', 'body' : 'Add paper', 'saved' : false})
+    this.setState({papers : temp});
   }
 
   removePaper(index) {
-    let temp = this.state.splice(index, 1);
-    this.setState({data : temp});
+    let temp = this.state.papers.slice();
+    temp.splice(index, 1);
+    this.setState({papers : temp});
   }
 
   componentDidMount() {
     $.ajax({
       url: '/papers', 
       success: (data) => {
+        data = data.map(datum=>{
+          datum.saved = true;
+          return datum;
+        })
         this.setState({
           papers: data
         })
@@ -41,12 +47,40 @@ class App extends React.Component {
   }
 
   searchByParam(title) {
-    console.log(JSON.stringify({'title' : title}));
     $.ajax({
       url: '/papers',
       method: "get",
       data: title, 
       success: (data) => {
+        data = data.map(datum=>{
+          datum.saved = true;
+          return datum;
+        })
+        this.setState({
+          papers: data
+        })
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+  }
+
+  savePaper(title, body, id='new') {
+    $.ajax({
+      url: '/papers',
+      method: "post",
+      contentType : "application/json",
+      data: JSON.stringify({
+        'title': title,
+        'body' : 'body',
+        'id' : id
+      }), 
+      success: (data) => {
+        data = data.map(datum=>{
+          datum.saved = true;
+          return datum;
+        })
         this.setState({
           papers: data
         })
@@ -61,6 +95,9 @@ class App extends React.Component {
     let temp = this.state.papers;
     temp[index].body = e.target.value;
     this.setState({papers : temp});
+    temp = this.state.papers;
+    temp[index].saved = false;
+    this.setState({papers : temp});
   }
 
   render () {
@@ -68,7 +105,7 @@ class App extends React.Component {
       <div>
         <h1>Item List</h1>
         <SearchBar searchByParam= {this.searchByParam} addPaper = {this.addPaper} />
-        <List papers={this.state.papers} updateBody = {this.updateBody} removePaper={this.removePaper} />
+        <List papers={this.state.papers} updateBody = {this.updateBody} removePaper={this.removePaper} savePaper={this.savePaper} />
       </div>
     )
   }
