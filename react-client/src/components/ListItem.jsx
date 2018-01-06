@@ -52,11 +52,14 @@ class ListItem extends React.Component {
       this.setState({unSavedBody : this.state.savedBody, unSavedTitle : this.state.savedTitle});
       this.setState({saved : true});
       console.log(this.state);
+      if (this.state.editTitle === true) {
+        this.setState({editTitle : false});
+      }
     }
   }
 
   updateTitle(e) {
-    this.setState({unSavedTitle : e.target.value});
+    this.setState({unSavedTitle : e.target.value, saved : false});
   }
 
   updateBody(e) {
@@ -87,7 +90,7 @@ class ListItem extends React.Component {
       { this.state.close === true ?
         <div className="deletePaper">
           <i className="fa fa-times fa-4x" aria-hidden="true" onClick={this.setClose}></i>
-          <h2>Close <button onClick={()=>{this.setClose(); this.removeItem(); this.props.removePaper(this.props.index)}} >the file</button> or <button onClick={()=>{this.props.delete(this.props.id, this.props.index) }} >delete entirely</button>?</h2>
+          <h2>Close <button onClick={()=>{this.setClose(); this.removeItem(); this.props.removePaper(this.props.index)}} >the file</button> or <button onClick={/*()=>{this.props.delete(this.props.id, this.props.index)}*/ ()=>{this.setClose(); this.removeItem(); this.props.removePaper(this.props.index)}} >delete entirely</button>?</h2>
         </div>
       : 
         <span></span>
@@ -95,7 +98,7 @@ class ListItem extends React.Component {
       {this.state.editTitle === false ?
         <h1 onClick={this.setTitle} >{ this.state.unSavedTitle }</h1>
       : 
-        <div className="titleInput" ><input value={ this.state.unSavedTitle } onChange={(e)=>{this.updateTitle(e)}} /><button onClick={(e)=>{this.props.updateBody(e, this.props.index, 'title', this.state.unSavedTitle); this.setTitle()}}>Update</button><button onClick={()=>{this.setTitle()}} >Revert</button></div>
+        <div className="titleInput" ><input value={ this.state.unSavedTitle } onChange={(e)=>{this.updateTitle(e)}} /><button onClick={(e)=>{this.props.updateBody(e, this.props.index, 'title', this.state.unSavedTitle); this.setTitle()}}>Update</button><button onClick={()=>{this.setBody(true)}} >Revert</button></div>
       }
         <i className="fa fa-times fa-2x" aria-hidden="true" onClick={this.setClose} ></i>
         {this.state.saved === true ?

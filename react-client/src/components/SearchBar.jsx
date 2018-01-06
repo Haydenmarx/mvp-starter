@@ -5,7 +5,7 @@ class SearchBar extends React.Component {
     super(props);
     this.state = { 
       searching : '',
-      userTitle : 'user'
+      userTitle : 'title'
     }
     this.updateState = this.updateState.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
@@ -32,7 +32,7 @@ class SearchBar extends React.Component {
         <label>Load by {this.state.userTitle === 'user' ? <span onClick= {this.updateSearch}>USER</span> : <span onClick= {this.updateSearch}>TITLE</span>}: </label>
         <input value={ this.state.searching } onChange={ this.updateState } />
         <button onClick={()=>{this.props.searchByParam(this.state.searching)}}>Search</button>
-        <button onClick={ this.props.addPaper } >New Paper</button>
+        <button className={'newPaper'} onClick={ this.props.addPaper } >New Paper</button>
       </div>
     )
   }

@@ -1,5 +1,7 @@
 body {
   background-image: url('http://goodnewsforpets.com/wp-content/uploads/2017/02/cats.jpg');
+  background-position: -220px -70px;
+  margin: 0px;
 }
 
 .paper {
@@ -22,6 +24,9 @@ body {
     max-width: 90%;
     width: 90%;
     min-height: 200px;
+    &:focus {
+      background: white;
+    }
   }
   & > i {
     cursor : pointer;
@@ -85,11 +90,12 @@ body {
     text-align: center;
     background: rgba(135, 231, 135, 0.466);
     border-bottom: 1px solid grey;
+    margin-top: 0px;
   }
   & > div > div {
       & button {
         margin-left: 10px;
-        &:nth-of-type(2) {
+        & .newPaper {
           float: right;
           margin-right: 20px;
         }
