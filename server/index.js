@@ -38,6 +38,28 @@ app.post('/papers', function (req, res) {
   //req.body.title, req.body.body
 });
 
+app.put('/papers', function (req, res) {
+  console.log(req.body);
+  // if ('request:', req.body.id === 'new') {
+  //   db.addPapers(req.body.title, req.body.body, function(err, data) {
+  //     if(err) {
+  //       res.sendStatus(500);
+  //     } else {
+  //       res.json(data);
+  //     }
+  //   });
+  // } else {
+  //   db.updatePapers(req.body.title, req.body.body, req.body.id, function(err, data) {
+  //     if(err) {
+  //       res.sendStatus(500);
+  //     } else {
+  //       res.json(data);
+  //     }
+  //   });
+  // }
+  //req.body.title, req.body.body
+});
+
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });

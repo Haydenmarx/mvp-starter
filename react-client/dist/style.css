@@ -1,5 +1,8 @@
+body {
+  background-image: url("http://goodnewsforpets.com/wp-content/uploads/2017/02/cats.jpg"); }
+
 .paper {
-  background: #87e787;
+  background: rgba(135, 231, 135, 0.466);
   margin: 20px;
   position: relative; }
   .paper > h1, .paper .titleInput {
@@ -11,6 +14,7 @@
     margin: 21.440px 0px 21.440px  30px;
     height: 37.33px; }
   .paper > textarea {
+    background: rgba(255, 255, 255, 0.514);
     margin: 30px;
     max-width: 90%;
     width: 90%;
@@ -58,5 +62,20 @@
         vertical-align: text-top;
         margin-top: 20px;
         cursor: pointer; }
+
+#app > div > h1 {
+  text-align: center;
+  background: rgba(135, 231, 135, 0.466);
+  border-bottom: 1px solid grey; }
+#app > div > div button {
+  margin-left: 10px; }
+  #app > div > div button:nth-of-type(2) {
+    float: right;
+    margin-right: 20px; }
+#app > div > div > label {
+  margin: 30px; }
+  #app > div > div > label > span {
+    font-weight: 600;
+    cursor: pointer; }
 
 /*# sourceMappingURL=style.css.map */

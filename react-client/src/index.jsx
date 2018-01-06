@@ -17,19 +17,34 @@ class App extends React.Component {
     this.removePaper = this.removePaper.bind(this);
     this.savePaper = this.savePaper.bind(this);
     this.successfulSave = this.successfulSave.bind(this);
+    this.deletePaper = this.deletePaper.bind(this);
   }
 
   addPaper() {
-    console.log('add paper');
     let temp = this.state.papers.slice();
     temp.push({'title' : 'Add title', 'body' : 'Add paper', 'saved' : false})
     this.setState({papers : temp});
   }
 
   removePaper(index) {
-    let temp = this.state.papers.slice();
-    temp.splice(index, 1);
-    this.setState({papers : temp});
+    // let temp = this.state.papers.slice();
+    //this.state.papers = [{key: value, key: value},{}]
+    // temp.splice(index, 1);
+
+    // temp.splice(index, 1);
+    // temp = [temp[0], temp[0]];
+
+    // temp = temp.map((paper, i) =>{
+    //   if (i !== index) {
+    //     return paper;
+    //   }
+    // }).filter(paper => paper !== undefined);
+    // var lis = $('.paper')
+    // for (var x=0; x<x.length; x++) {
+    //   lis[x].remove;
+    // }
+    // this.setState({testArr : temp});
+    // this.setState({papers : temp});
   }
 
   componentDidMount() {
@@ -70,7 +85,7 @@ class App extends React.Component {
     });
   }
 
-  savePaper(title, body, id='new', index, cb) {
+  savePaper(title, body, id='new', index) {
     $.ajax({
       url: '/papers',
       method: "post",
@@ -82,7 +97,23 @@ class App extends React.Component {
       }), 
       success: (data) => {
         console.log('success: ', data, ' ', this);
-        cb(index);
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+  }
+
+  deletePaper(id='new', index) {
+    $.ajax({
+      url: '/papers',
+      method: "put",
+      contentType : "application/json",
+      data: JSON.stringify({
+        'id' : id
+      }), 
+      success: (data) => {
+        console.log('success: ', data, ' ', this);
       },
       error: (err) => {
         console.log('err', err);
@@ -121,9 +152,14 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <h1>Item List</h1>
+        <h1>Text Editor with Cats?</h1>
         <SearchBar searchByParam= {this.searchByParam} addPaper = {this.addPaper}/>
-        <List papers={this.state.papers} updateBody = {this.updateBodyTitle} removePaper={this.removePaper} savePaper={this.savePaper} successfulSave={this.successfulSave} addPaper = {this.addPaper} />
+        {this.state.papers.length === 0
+        ?
+          <span></span>
+        :
+          <List papers={this.state.papers} updateBody = {this.updateBodyTitle} removePaper={this.removePaper} savePaper={this.savePaper} successfulSave={this.successfulSave} addPaper = {this.addPaper} delete={this.deletePaper} />
+        }
       </div>
     )
   }
